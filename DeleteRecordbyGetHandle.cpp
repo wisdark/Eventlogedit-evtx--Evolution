@@ -587,6 +587,7 @@ void PrintUsage(char *argv)
 {
 	printf("\nEnumerate all processes and get specified file's handle\n");
 	printf("\nI can remove individual lines from Windows XML Event Log (EVTX) files\n");
+	printf("Delete the eventlog by rewriting the evtx file.\n");
 	printf("Support:Win7 and later\n");
 	printf("Author:3gstudent@3gstudent\n\n");
 	printf("Usage:\n");
@@ -605,7 +606,7 @@ int main(int argc, char *argv[])
 		printf("[*]Try to enumerate all processes and get <%s>'s handle.\n", argv[1]);
 	else if ((argc == 4) && (memcmp(argv[2], "1", 1) == 0))
 	{
-		printf("[*]Try to delete <%s>'s record.\n", argv[1]);
+		printf("[*]Try to delete %s's record.\n", argv[1]);
 		printf("[*]EventRecordID is %s\n", argv[3]);	
 		sscanf_s(argv[3], "%d", &EventRecordID);
 	}
@@ -678,7 +679,7 @@ int main(int argc, char *argv[])
 
 		if (!(processHandle = OpenProcess(PROCESS_DUP_HANDLE, FALSE, handle.ProcessId)))
 		{
-			printf("[!]Could not open PID %d!\n", handle.ProcessId);
+			//printf("[!]Could not open PID %d!\n", handle.ProcessId);
 			ErrorPID = handle.ProcessId;
 			free(objectTypeInfo);
 			free(objectNameInfo);
